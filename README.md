@@ -27,7 +27,7 @@ mvn package && java -jar target/configuration-service-0.0.1-SNAPSHOT.jar
 
 mvn package && java -jar target/configuration-client-0.0.1-SNAPSHOT.jar
 
-Here <artifactId>configuration-client</artifactId>, <version>0.0.1-SNAPSHOT</version> picked from pom.xml. Note that this is only name of the jar file. The spring application name is specified in the property spring.application.name in the local file bootstrap.yml. 
+Here <artifactId>configuration-client</artifactId>, <version>0.0.1-SNAPSHOT</version> picked from pom.xml. Note that this is only name of the jar file. The spring application name is specified in the property spring.application.name in the local file bootstrap.yml.
 
 To reflect the changes in the config file in the client, use the @RefreshScope annotation in the client code. Also, hit the refresh endpoint on the client.
 
@@ -37,7 +37,7 @@ But before this, you need to enable the refresh endpoint by adding the following
 
 management.endpoints.web.exposure.include=*
 
-Note: The above statements on refresh are also true for server. If we are embedding config server in K9, we need to do the above steps in server. But if config server is run as a separate microservice, you can do the refresh in k9 itself, which is a client.
+Note: The above statements on refresh are also true for server. If we are embedding config server in the tool, we need to do the above steps in server. But if config server is run as a separate microservice, you can do the refresh in the tool itself, which is a client.
 
 How spring appln name propagated & properties are read by the server ?
 
@@ -96,7 +96,7 @@ How to use Spring Cloud Config in an orchestration tool
 Option 1: Tool as the config server
 We can have the common approach / same meta data collection and operations for all clients. ( clients who need config file updates, modern clients who need dynamic data update - spring boot or non-boot )
 
-Option 2: Tool as client to config server with K9 doing the config file processing
+Option 2: Tool as client to config server with tool doing the config file processing
 There is a standalone Spring cloud config server. Tool can do all the config file handling,  but for new clients ( with dynamic data handling), the spring cloud server need to handle the metadata. We cannot have two different services handling metadata for 2 different use cases. Theoretically, this may be possible, but no benefits.
 
 Option 3: Tool as the client to config server, with config server doing all the processing
@@ -125,7 +125,7 @@ It is important to write the config server as state less. Basically it has 2 mai
 It should not be holding any config data per se.
 
 Approach for properties file for config server:
-The approach could be that we use a separate config file which can be loaded through command line for conventional config file transfer applications. The command line approach is good to separate out the environment from the code. It can also be a database file, but this results in tight coupling between k9 and config server.
+The approach could be that we use a separate config file which can be loaded through command line for conventional config file transfer applications. The command line approach is good to separate out the environment from the code. It can also be a database file, but this results in tight coupling between the tool and config server.
 
 For modern clients, only base properties file is good enough. They have to adher to the defined format and the config data will get updated.
 
