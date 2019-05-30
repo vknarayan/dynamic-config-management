@@ -3,7 +3,9 @@
 Benefits of externalized config manageement:
 
 Faster config changes - automatic reloading without restarting the applications is made possible
+
 Supporting non-uniform environments become simple. The code base can remain the same, only configuration need to be changed.
+
 Credentials stored in config files need to be private. They have to be handled separately compared to the code.
 
 Externalization is already well understood. People have figured out how to externalize all environment specific configuration values and use them in appropriate ways. It still makes sense in most cases to use the common repository for code and the config files. But still how do you handle configuration changes for a minor release, where there are no code changes ? This is one of the strong motivations for config file management.
@@ -130,9 +132,15 @@ The approach could be that we use a separate config file which can be loaded thr
 For modern clients, only base properties file is good enough. They have to adher to the defined format and the config data will get updated.
 
 cfg4j
+
 No server - client concept
+
 Everytime configuration changes, your object will get updated
+
 on demand and periodic load available, and other strategies can be implemented
+
 can be specified where configuration is located inside git
+
 can support different repositories through plugins ( git, consul,...)
+
 Multi-tenant support (a.k.a. environment selection) - store multiple configuration sets in a single configuration store (e.g. dev, test, prod) in your app or you want to maintain one store for multiple tenants). To support this use case cfg4j introduces Environments. Environment is simply a way to tell the provider where in the store is your configuration set located
